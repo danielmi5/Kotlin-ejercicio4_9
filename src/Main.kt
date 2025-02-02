@@ -2,7 +2,14 @@ fun pedirOpcion(numOpciones: Int): Int {
     var opcion: Int = -1
     do {
         println("Introduce una de las $numOpciones opciones >> ")
-        opcion = readln().toInt()
+        try {
+            opcion = readln().toInt()
+            if (opcion !in 1..numOpciones) throw IllegalArgumentException("Opción incorrecta")
+        } catch (e: NumberFormatException) {
+            println("*ERROR* -> Opcion no válida.")
+        } catch (e: IllegalArgumentException){
+            println("*ERROR* -> $e")
+        }
     } while (opcion !in 1..numOpciones)
     return opcion
 }
